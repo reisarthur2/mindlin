@@ -18,5 +18,4 @@ def plotar (funcao1,funcao2,funcao3):
     eixos.plot (x,tuple(map(funcao3,x)),scalex=0.1,scaley=.01,linewidth=.5,label='u0')
     eixos.grid()
     eixos.legend()
-    mp.xlabel('amogus')
     mp.show()

@@ -10,12 +10,13 @@ def derivada (funcao,x):
     return (funcao(x+0.0001)-funcao(x))/0.0001
 
 
-def plotar (funcao1,funcao2,funcao3,liminf=0,limsup=1):
+def plotar (funcao1,funcao2,funcao3):
     x=linspace(0,1,100)
     fig, eixos = mp.subplots(layout='constrained')
-    eixos.plot (x,tuple(map(funcao1,x)),scalex=0.1,scaley=.01,label='ue1')
-    eixos.plot (x,tuple(map(funcao2,x)),scalex=0.1,scaley=.01,label='ue2')
-    eixos.plot (x,tuple(map(funcao3,x)),scalex=0.1,scaley=.01,label='u0')
+    eixos.plot (x,tuple(map(funcao1,x)),scalex=0.1,scaley=.01,linewidth=.5,label='ue1')
+    eixos.plot (x,tuple(map(funcao2,x)),scalex=0.1,scaley=.01,linewidth=.5,label='ue2')
+    eixos.plot (x,tuple(map(funcao3,x)),scalex=0.1,scaley=.01,linewidth=.5,label='u0')
+    eixos.grid()
     eixos.legend()
     mp.xlabel('amogus')
-    #mp.show()
+    mp.show()

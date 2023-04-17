@@ -1,7 +1,7 @@
 from numpy import cos,pi,sin
 from funcoes_uteis import integral,derivada,plotar
 
-l=0.5
+l=.25
 L=1
 
 e=l/L
@@ -29,10 +29,14 @@ def N2(y):
 def u2 (x):
     return (funcao_f(x)/a_chapeu)*N2(x/e)
 
-def ue2 (x):
-    return u0(x)+e*u1(x)+e*e*u2(x)
-
 def ue1 (x):
     return u0(x)+e*u1(x)
 
+def ue2 (x):
+    return u0(x)+e*u1(x)+e*e*u2(x)
+
+
+zero=lambda x: 0
+
 plotar(ue1,ue2,u0)
+plotar(N1,N2,zero)

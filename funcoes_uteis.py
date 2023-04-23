@@ -4,12 +4,12 @@ from typing import Callable,Iterable
 
 #funcoes basicas para fazer analise
 def integral (funcao: Callable,lim_sup:float=1,lim_inf:float=0):
-    precisao_por_unidade=250
+    precisao_por_unidade=300
     intervalo=linspace(lim_inf,lim_sup,precisao_por_unidade)
     return trapz(funcao(intervalo),intervalo)
 
 def derivada (funcao:Callable,x:float) -> float:
-    return (funcao(x+0.0001)-funcao(x))/0.0001
+    return (funcao(x+0.00001)-funcao(x))/0.00001
 
 def plotar (*args:Callable,**kwargs):
     numero_amostras= kwargs.get ('numero_amostras',100)
@@ -25,14 +25,19 @@ def plotar (*args:Callable,**kwargs):
     mp.show()
 
 def grafico_duplo (*args:Iterable,**kwargs):
-    numero_amostras= kwargs.get ('numero_amostras',100)
+    numero_amostras= kwargs.get ('numero_amostras',200)
+    
     escalax=kwargs.get ('escala_x',0.1)
     escalay=kwargs.get ('escala_y',0.1)
+    
     linha_espessura=kwargs.get ('linha_espessura',0.5)
+    
     titulo1=kwargs.get ('titulo_1','sem nada')
     titulo2=kwargs.get ('titulo_2','sem nada')
+    
     eixox1=kwargs.get ('eixo_x1','x')
     eixox2=kwargs.get ('eixo_x1','x')
+    
     eixoy1=kwargs.get ('eixo_y1',r'Aproximações de $U^{ε}$')
     eixoy2=kwargs.get ('eixo_y2',r'$N_{x/ε}$')
     

@@ -1,8 +1,10 @@
 from numpy import cos,pi,sin
 from funcoes_uteis import integral,derivada,plotar,grafico_duplo
 from fractions import Fraction
+from caso_continuo_ex1 import ue
+
 l=1
-L=1
+L=32
 
 e=l/L
 
@@ -36,5 +38,4 @@ def ue2 (x):
 
 zero=lambda x: 0
 
-#plotar(ue1,ue2,u0)
-grafico_duplo([u0,ue1,ue2],[N1,N2],titulo_1=f'ε={Fraction (e).limit_denominator()}',titulo_2=f'ε={Fraction (e).limit_denominator()}')
+grafico_duplo([u0,ue1,ue2,ue],[N1,N2],titulo_1=f'ε={Fraction (e).limit_denominator()}',titulo_2=f'ε={Fraction (e).limit_denominator()}')

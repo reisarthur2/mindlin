@@ -1,8 +1,8 @@
 from numpy import cos,pi,sin
 from funcoes_uteis import integral,derivada,plotar,grafico_duplo
 from fractions import Fraction
-from caso_continuo_ex1 import ue
-
+import time
+start_time = time.time()
 l=1
 L=32
 
@@ -38,4 +38,12 @@ def ue2 (x):
 
 zero=lambda x: 0
 
-grafico_duplo([u0,ue1,ue2,ue],[N1,N2],titulo_1=f'ε={Fraction (e).limit_denominator()}',titulo_2=f'ε={Fraction (e).limit_denominator()}')
+grafico_duplo([u0,ue1,ue2],[N1,N2],titulo_1=f'ε={Fraction (e).limit_denominator()}',titulo_2=f'ε={Fraction (e).limit_denominator()}')
+
+
+end_time = time.time()
+
+# Calculando o tempo decorrido
+elapsed_time = end_time - start_time
+
+print(f'Tempo de execução: {elapsed_time:.5f} segundos')

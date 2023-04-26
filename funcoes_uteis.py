@@ -1,27 +1,47 @@
-from numpy import linspace,trapz, zeros_like , vectorize, polynomial
+from functools import reduce
+from numpy import linspace,trapz , vectorize ,pi , cos ,sin , polynomial , sum
 import matplotlib.pyplot as mp
 from typing import Callable,Iterable
 
 #funcoes basicas para fazer analise
-#def integral (funcao: Callable,lim_sup:float=1,lim_inf:float=0):
-#    precisao_por_unidade=200
-#    intervalo=linspace(lim_inf,lim_sup,precisao_por_unidade)
-#    y2=vectorize(funcao)
-#    return trapz(y2(intervalo),intervalo)
+#tentativas de integral mais eficiente (trapz atual vencedor)
+def integralgeral (funcao: Callable,lim_sup:float=1,lim_inf:float=0):
+    precisao_por_unidade=10000
+    intervalo=linspace(lim_inf,lim_sup,precisao_por_unidade)
+    return trapz (vectorize(funcao)(intervalo),intervalo)
 
 def integral (funcao: Callable,lim_sup:float=1,lim_inf:float=0):
-    precisao_por_unidade=200
+    precisao_por_unidade=2000
     intervalo=linspace(lim_inf,lim_sup,precisao_por_unidade)
     try:
-        return trapz(funcao(intervalo),intervalo)
+        return trapz (funcao(intervalo),intervalo)
     except:
         return trapz (vectorize(funcao)(intervalo),intervalo)
+
+#def integral (funcao: Callable,lim_sup:float=1,lim_inf:float=0):
+#    grau_quadratura=100
+#    x, w = polynomial.legendre.leggauss(grau_quadratura)
+#    t = 0.5*(lim_sup-lim_inf)*x + 0.5*(lim_sup+lim_inf)
+#    try:
+#        return 0.5*(lim_sup-lim_inf)*sum(w*funcao(t))
+#    except:
+#        return 0.5*(lim_sup-lim_inf)*sum(w*vectorize(funcao)(t))
 
 def derivada (funcao:Callable,x:float) -> float:
     return (funcao(x+0.00001)-funcao(x))/0.00001
 
+def fourier_coeficientes (funcao_imitada, **kwargs):
+    numero_senoides = kwargs.get ('numero_senoides',100)
+    indice = linspace (0,numero_senoides,numero_senoides+1)
+    return (list (map(lambda x: 2*integralgeral(lambda y: funcao_imitada(y)*cos(2*pi*y*x)),indice)),list (map(lambda x: 2*integralgeral(lambda y: funcao_imitada(y)*sin(2*pi*y*x)),indice)))
+
+def transformada_fourier (coeficientes,ponto):
+    tamanho=len(coeficientes[0])
+    indice = linspace (0,tamanho,tamanho+1)
+    return coeficientes[0][0]/2 + reduce(lambda acumulador,proximo: acumulador+proximo,map(lambda an,bn,n:an*cos(n*2*pi*ponto)+bn*sin(n*2*pi*ponto),coeficientes[0][1:],coeficientes[1][1:],indice[1:]))
+
 def plotar (*args:Callable,**kwargs):
-    numero_amostras= kwargs.get ('numero_amostras',50)
+    numero_amostras= kwargs.get ('numero_amostras',500)
     escalax=kwargs.get ('escala_x',0.1)
     escalay=kwargs.get ('escala_y',0.1)
     linha_espessura=kwargs.get ('linha_espessura',0.5)
@@ -70,4 +90,5 @@ def grafico_duplo (*args:Iterable,**kwargs):
     eixo2.set_xlabel (eixox2)
     eixo2.set_ylabel (eixoy2,size=15)
     
+    #mp.show ()
     mp.savefig('saida.png')

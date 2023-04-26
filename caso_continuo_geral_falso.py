@@ -4,7 +4,7 @@ from fractions import Fraction
 import time
 start_time = time.time()
 l=1
-L=32
+L=64
 
 e=l/L
 

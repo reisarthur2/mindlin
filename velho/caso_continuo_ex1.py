@@ -5,7 +5,7 @@ import time
 start_time = time.time()
 
 l=1
-L=256
+L=1
 
 e=l/L
 funcao_f = lambda x: x

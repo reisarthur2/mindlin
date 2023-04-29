@@ -5,15 +5,15 @@ start_time = time.time()
 
 #modificável--------------------------------------
 l=1
-L=320
+L=32
 
-a1=1
-a2=9
-delta=.05
+a1=2
+a2=3
+delta=.25
 
 e=l/L
 
-funcao_aantiga = lambda x: a1 if (abs (sin(cos(x/e)))<.1) else a2
+funcao_aantiga = lambda x: a1 if (x<.5-delta) else a1 if (x>.5+delta) else a2
 funcao_x = lambda x: -1+x-x
 
 coeficientes=fourier_coeficientes (funcao_aantiga,numero_senoides=1000)

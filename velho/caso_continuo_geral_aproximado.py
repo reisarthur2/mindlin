@@ -4,7 +4,7 @@ from fractions import Fraction
 import time
 start_time = time.time()
 l=1
-L=64
+L=1
 
 e=l/L
 
@@ -23,8 +23,8 @@ def N1 (y):
 def u1 (x):
     return (derivada(u0,x))*N1(x/e)
 
+tudocte=integral(N1)*a_chapeu
 def N2(y):
-    tudocte=integral(N1)*a_chapeu
     return integral (lambda s: -N1(s)+tudocte/funcao_a(s),y)
 
 def u2 (x):
@@ -38,8 +38,8 @@ def ue2 (x):
 
 zero=lambda x: 0
 
-grafico_duplo([u0,ue1,ue2],[N1,N2],titulo_1=f'ε={Fraction (e).limit_denominator()}',titulo_2=f'ε={Fraction (e).limit_denominator()}')
-
+#grafico_duplo([u0,ue1,ue2],[N1,N2],titulo_1=f'ε={Fraction (e).limit_denominator()}',titulo_2=f'ε={Fraction (e).limit_denominator()}')
+plotar (ue2)
 
 end_time = time.time()
 

@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "type_traits": "cpp",
+        "functional": "cpp",
+        "fstream": "cpp",
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "random": "cpp"
+    }
+}

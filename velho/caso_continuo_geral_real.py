@@ -15,6 +15,7 @@ funcao_x = lambda x: x
 a_chapeu = (integral(lambda x: (funcao_a(x))**-1))**-1
 funcao_F = lambda t: integral (funcao_x,t)
 parte_constante = a_chapeu*integral(lambda t: funcao_F(t)/funcao_a(t))
+
 def ue (x):
     return integral(lambda s: (funcao_F(s)-parte_constante)/funcao_a(s),x)
 

@@ -16,14 +16,15 @@ a posteriori, mas por agora está ok
 
 using namespace std;
 int main (int argc, char* argv[]) {
-    if (argc != 3){
+    if (argc < 3){
         cerr << "Uso: " << argv[0] << " <epslon> <precisao grafico>\n";
         return 1;
     }
 
     float E = stof(argv[1]);
     float precisao_grafico = stof(argv[2]);
-    
+    float inferior = stof (argv[3]);
+    float superior = stof (argv[4]);
     //declaração de funcoes do caso, favor nao tocar no resto
     auto funcao_a = [E](double x) -> double{
         return 
@@ -53,11 +54,11 @@ int main (int argc, char* argv[]) {
     
     ofstream saida("./magia_cpp/continuo_exato_saida_dados.txt");
     saida << "[[";
-    for (float i=0;i<1;i+=precisao_grafico){
+    for (float i=inferior;i<superior;i+=precisao_grafico){
         saida << to_string(i)+",";
     };
     saida << "0.0],[";
-    for (float j=0;j<1;j+=precisao_grafico){
+    for (float j=inferior;j<superior;j+=precisao_grafico){
         saida << to_string(ue(j))+",";
     };
     saida << "0.0]]";

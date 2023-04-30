@@ -21,7 +21,7 @@ def transformada_fourier (coeficientes,ponto):
     return coeficientes[0][0]/2 + reduce(lambda acumulador,proximo: acumulador+proximo,map(lambda an,bn,n:an*cos(n*2*pi*ponto)+bn*sin(n*2*pi*ponto),coeficientes[0][1:],coeficientes[1][1:],indice[1:]))
 
 def integral (funcao: Callable,lim_sup:float=1,lim_inf:float=0):
-    precisao_por_unidade=2000
+    precisao_por_unidade=7000
     intervalo= linspace(lim_inf,lim_sup, precisao_por_unidade)
     try:
         return trapz (funcao(intervalo),intervalo)
@@ -92,4 +92,4 @@ def grafico_duplo (*args:Iterable,**kwargs):
     eixo2.set_ylabel (eixoy2,size=15)
     
     #mp.show ()
-    mp.savefig('saida.png')
+    mp.savefig('saida_antiga.png')

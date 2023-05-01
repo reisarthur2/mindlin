@@ -29,7 +29,7 @@ def exato_ue (*args, **kwargs):
     limite_superior = kwargs.get ('limite_superior',1)
     limite_inferior = kwargs.get ('limite_inferior',0)
     
-    if (type(precisao_grafico) is float):
+    if (precisao_grafico>=20):
         system('g++ ./magia_cpp/continuo_exato.cpp -o ./magia_cpp/continuo_exato')
         system(f'.\magia_cpp\continuo_exato {e} {precisao_grafico} {limite_inferior} {limite_superior}')
 
@@ -38,5 +38,5 @@ def exato_ue (*args, **kwargs):
             saida.append (nome)
             return saida
     else:
-        print ("verificar o valor de precisao")
+        print ("verificar o valor de precisao minimo 20")
         return 0

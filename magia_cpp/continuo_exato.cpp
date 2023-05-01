@@ -22,13 +22,16 @@ int main (int argc, char* argv[]) {
     }
 
     float E = stof(argv[1]);
-    float precisao_grafico = stof(argv[2]);
+    float amostras = stof(argv[2]);
     float inferior = stof (argv[3]);
     float superior = stof (argv[4]);
+
+    long double precisao_grafico = (superior-inferior)/amostras;
     //declaração de funcoes do caso, favor nao tocar no resto
-    auto funcao_a = [E](double x) -> double{
+    auto funcao_a = [E](double y) -> double{
+        long double y_real = y/E - floor(y/E);
         return 
-        1+0.25*cos(2*M_PI*x/E);
+        1+0.25*cos(2*M_PI*y_real);
         };
     //aqui ^
     auto funcao_x = [E](double x) -> double{
@@ -51,17 +54,11 @@ int main (int argc, char* argv[]) {
             }),x);
         };
 
+    string auxiliar_saida = "";
+    auxiliar_saida += criador_grafico_json (auxiliar_saida,ue,"ue",superior,inferior,precisao_grafico);
     
     ofstream saida("./magia_cpp/continuo_exato_saida_dados.txt");
-    saida << "[[";
-    for (float i=inferior;i<superior;i+=precisao_grafico){
-        saida << to_string(i)+",";
-    };
-    saida << "0.0],[";
-    for (float j=inferior;j<superior;j+=precisao_grafico){
-        saida << to_string(ue(j))+",";
-    };
-    saida << "0.0]]";
+    saida << auxiliar_saida.substr(0,auxiliar_saida.length()-1);
     saida.close();
 
     return 0;

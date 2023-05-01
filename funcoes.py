@@ -72,6 +72,11 @@ def grafico_duplo (conjunto_1:list,conjunto_2:list,**kwargs):
         
         titulo_1 = str\n
         titulo_2 = str\n
+        
+        por padrao é salvo um arquivo\n
+        se quiser mostrar em tela separada use:\n
+        mostrar = 1\n
+        \n
         nao precisa mexer nos rotulos do eixoy\n
         }
     """
@@ -80,8 +85,8 @@ def grafico_duplo (conjunto_1:list,conjunto_2:list,**kwargs):
     
     linha_espessura=kwargs.get ('linha_espessura',0.5)
     
-    titulo1=kwargs.get ('titulo_1','sem nada')
-    titulo2=kwargs.get ('titulo_2','sem nada')
+    titulo1=kwargs.get ('titulo_1','titulo_1')
+    titulo2=kwargs.get ('titulo_2','titulo_2')
     
     eixox1=kwargs.get ('rotulo_eixo_x1','rotulo_eixo_x1')
     eixox2=kwargs.get ('rotulo_eixo_x2','rotulo_eixo_x2')
@@ -90,6 +95,7 @@ def grafico_duplo (conjunto_1:list,conjunto_2:list,**kwargs):
     eixoy2=kwargs.get ('rotulo_eixo_y2',r'$N_{x/ε}$')
     
     nome_arquivo = kwargs.get ('nome_arquivo','saida_dupla')
+    mostrar = kwargs.get ('mostrar',0)
     
     fig, (eixo1,eixo2) = mp.subplots(ncols=2,layout='constrained')
     
@@ -109,5 +115,7 @@ def grafico_duplo (conjunto_1:list,conjunto_2:list,**kwargs):
     eixo2.set_xlabel (eixox2)
     eixo2.set_ylabel (eixoy2,size=15)
     
-    #mp.show ()
-    mp.savefig(nome_arquivo+'.png')
+    if (mostrar):
+        mp.show ()
+    else:
+        mp.savefig(nome_arquivo+'.png')

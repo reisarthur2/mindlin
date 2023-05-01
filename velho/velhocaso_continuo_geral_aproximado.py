@@ -3,7 +3,7 @@ from funcoes_uteis import integral,derivada,plotar,grafico_duplo
 from fractions import Fraction
 import time
 start_time = time.time()
-l=1
+l=.2
 L=1
 
 e=l/L
@@ -30,8 +30,6 @@ def u0 (x):
 def N1 (y):
     return integral (lambda s: (a_chapeu/funcao_a(s))-1,y)
 
-print ('n1 em 5 = ',N1(5))
-
 def u1 (x):
     return (derivada(u0,x))*N1(x/e)
 
@@ -53,11 +51,7 @@ zero=lambda x: 0
 
 #grafico_duplo([u0,ue1,ue2],[N1,N2],titulo_1=f'ε={Fraction (e).limit_denominator()}',titulo_2=f'ε={Fraction (e).limit_denominator()}')
 
-print ('constante_u0 = ',constante_u0)
-print ('tudocte = ',tudocte)
-print ('achapeu =', a_chapeu)
-
-grafico_duplo ([ue2],[N1,N2])
+grafico_duplo([N1,N2],[])
 
 end_time = time.time()
 

@@ -39,7 +39,7 @@ def N2ex1 (y):
 def u2ex1 (y):
     return u0ex1(y)+derivada(u0ex1,y)*N1ex1(y)+(funcao_f(y)/a_chapeu)*N2ex1(y)
 
-plotar (u2ex1)
+plotar (N2ex1)
 
 end_time = time.time()
 

@@ -21,7 +21,7 @@ def transformada_fourier (coeficientes,ponto):
     return coeficientes[0][0]/2 + reduce(lambda acumulador,proximo: acumulador+proximo,map(lambda an,bn,n:an*cos(n*2*pi*ponto)+bn*sin(n*2*pi*ponto),coeficientes[0][1:],coeficientes[1][1:],indice[1:]))
 
 def integral (funcao: Callable,lim_sup:float=1,lim_inf:float=0):
-    precisao_por_unidade=7000
+    precisao_por_unidade=2000
     intervalo= linspace(lim_inf,lim_sup, precisao_por_unidade)
     try:
         return trapz (funcao(intervalo),intervalo)
@@ -52,10 +52,10 @@ def plotar (*args:Callable,**kwargs):
         eixos.plot (x,tuple(map(funcao,x)),scalex=escalax,scaley=escalay,linewidth=linha_espessura,label=funcao.__name__)
     eixos.grid()
     eixos.legend()
-    mp.savefig('saida.png')
+    mp.savefig('saida_antiga.png')
 
 def grafico_duplo (*args:Iterable,**kwargs):
-    numero_amostras1= kwargs.get ('numero_amostras1',60)
+    numero_amostras1= kwargs.get ('numero_amostras1',50)
     numero_amostras2= kwargs.get ('numero_amostras2',100)
     
     escalax=kwargs.get ('escala_x',0.1)

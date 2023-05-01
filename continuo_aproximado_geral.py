@@ -1,8 +1,7 @@
 from os import system
 import json
-from funcoes import plotar
 
-def aproximado_un (*args, **kwargs):
+def aproximado_numerico_un (*args, **kwargs):
     
     """
     sobre os argumentos args com exemplo de uso {\n
@@ -47,7 +46,7 @@ def aproximado_un (*args, **kwargs):
     for iterador in parametros_cpp[1:]:
         parametro_final=parametro_final+" "+str (iterador)
     
-    if (type(precisao_grafico) is float):
+    if (precisao_grafico>=20):
         system('g++ ./magia_cpp/continuo_aproximado.cpp -o ./magia_cpp/continuo_aproximado')
         system(f'.\magia_cpp\continuo_aproximado {e} {precisao_grafico} {limite_inferior} {limite_superior} {parametro_final}')
 
@@ -56,4 +55,4 @@ def aproximado_un (*args, **kwargs):
             saida = json.loads (resultados.read())
             return saida[0][:-1],saida[1][:-1]
     else:
-        print ("verificar o valor de precisao")
+        print ("verificar o valor de precisao minimo 20")

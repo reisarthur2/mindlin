@@ -1,6 +1,6 @@
 # mindlin
-for english speakers:
-abstract:
+for english speakers:\n
+abstract:\n
 research using matplotlib and numpy from python and a bunch of c++ code (for optimization) analysing
 structures with a rapdly oscilating property
 

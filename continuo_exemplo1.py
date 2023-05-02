@@ -48,10 +48,10 @@ def aproximado_analitico_un (*args, **kwargs):
         parametro_final=parametro_final+" "+str (iterador)
     
     if (precisao_grafico>20):
-        system('g++ ./magia_cpp/continuo_exemplo1.cpp -o ./magia_cpp/continuo_exemplo1')
-        system(f'.\magia_cpp\continuo_exemplo1 {e} {precisao_grafico} {limite_inferior} {limite_superior} {parametro_final}')
+        system('g++ ./magia_cpp/continuo_exemplo1.cpp -o ./magia_cpp/saidas_e_executaveis/continuo_exemplo1')
+        system(f'.\magia_cpp\saidas_e_executaveis\continuo_exemplo1 {e} {precisao_grafico} {limite_inferior} {limite_superior} {parametro_final}')
 
-        with open ("./magia_cpp/continuo_exemplo1_saida_dados.txt","r") as resultados:
+        with open ("./magia_cpp/saidas_e_executaveis/continuo_exemplo1_saida_dados.txt","r") as resultados:
             saida = json.loads (resultados.read())
             return saida[0][:-1],saida[1][:-1]
     else:

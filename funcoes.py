@@ -16,6 +16,11 @@ def plotar (*args:list,**kwargs):
         escala_y = float (0.1 por padrão)\n
         nome_arquivo = str\n
         linha_espessura = float (1 por padrão)\n
+        titulo = str\n
+        |\n
+        por padrao é salvo um arquivo\n
+        se quiser mostrar em tela separada use:\n
+        mostrar = 1\n
         }
     
     exemplo de uso:\n
@@ -32,7 +37,10 @@ def plotar (*args:list,**kwargs):
     escalay=kwargs.get ('escala_y',0.1)
 
     linha_espessura=kwargs.get ('linha_espessura',1)
+    
     nome_arquivo = kwargs.get ('nome_arquivo','saida_normal')
+    titulo = kwargs.get ('titulo','titulo')
+    mostrar = kwargs.get ('mostrar',0)
     
     fig, eixos = mp.subplots(layout='constrained')
     for numero_do_grafico in range(len (args)):
@@ -40,9 +48,11 @@ def plotar (*args:list,**kwargs):
     
     eixos.grid()
     eixos.legend()
-    
-    #mp.show ()
-    mp.savefig(nome_arquivo+'.png')
+    eixos.set_title(titulo,size=20)
+    if (mostrar):
+        mp.show ()
+    else:
+        mp.savefig(nome_arquivo+'.png')
 
 
 def grafico_duplo (conjunto_1:list,conjunto_2:list,**kwargs):

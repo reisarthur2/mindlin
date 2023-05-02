@@ -55,7 +55,7 @@ int main (int argc, char* argv[]) {
     string auxiliar_saida = "";
     auxiliar_saida += criador_grafico_json (auxiliar_saida,ue,"uep",superior,inferior,precisao_grafico);
     
-    ofstream saida("./magia_cpp/partes_exato_saida_dados.txt");
+    ofstream saida("./magia_cpp/saidas_e_executaveis/partes_exato_saida_dados.txt");
     saida << auxiliar_saida.substr(0,auxiliar_saida.length()-1);
     saida.close();
 

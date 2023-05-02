@@ -112,7 +112,7 @@ int main (int argc, char* argv[]) {
             }
         }
     }
-    ofstream saida("./magia_cpp/continuo_exemplo1_saida_dados.txt");
+    ofstream saida("./magia_cpp/saidas_e_executaveis/continuo_exemplo1_saida_dados.txt");
     saida << "[[" << saida_1 << "[[0],[0],\"sucesso\"]],[" << saida_2 << "[[0],[0],\"sucesso\"]]]";
     saida.close();
     return 1;

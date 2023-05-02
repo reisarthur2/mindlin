@@ -30,10 +30,10 @@ def exato_partes_ue (*args, **kwargs):
     limite_inferior = kwargs.get ('limite_inferior',0)
     
     if (precisao_grafico>=20):
-        system('g++ ./magia_cpp/partes_exato.cpp -o ./magia_cpp/partes_exato')
-        system(f'.\magia_cpp\partes_exato {e} {precisao_grafico} {limite_inferior} {limite_superior}')
+        system('g++ ./magia_cpp/partes_exato.cpp -o ./magia_cpp/saidas_e_executaveis/partes_exato')
+        system(f'.\magia_cpp\saidas_e_executaveis\partes_exato {e} {precisao_grafico} {limite_inferior} {limite_superior}')
 
-        with open ("./magia_cpp/partes_exato_saida_dados.txt","r") as resultados:
+        with open ("./magia_cpp/saidas_e_executaveis/partes_exato_saida_dados.txt","r") as resultados:
             saida = json.loads (resultados.read())
             saida.append (nome)
             return saida

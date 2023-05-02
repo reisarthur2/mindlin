@@ -35,7 +35,7 @@ análise:
        que em questão de velocidade e precisão u0 nas aproximadas é superior
        até para epsilons maiores
 
-mas se for para rankear:
+mas se for para fazer um top 3:
 1-analitico
 2-exato
 3-numerico
@@ -46,56 +46,69 @@ se torna o programa, mas o exato também não fica para trás
 #por favor mudar o epsilon do jeito que desejar
 epsilon=1/4
 
-#exemplo 1 de uso - apenas um gráfico, para aproximadas é preciso
+#tem vários exemplos de uso, meu preferido é o 4
+exemplo_analisado = 4
+
+#exemplo 1.1 de uso - apenas um gráfico, para aproximadas é preciso
 #                   saber qual gráfico se quer, veja as saidas
 #                   para saber como consegui-lo!
-plotar (exato_ue(epsilon=epsilon))
-#plotar (aproximado_analitico_un('u2',epsilon=epsilon)[0][0])
+if (exemplo_analisado==1.1):
+      plotar (exato_ue(epsilon=epsilon))
+#exemplo 1.2
+if (exemplo_analisado==1.2):
+      plotar (aproximado_analitico_un('u2',epsilon=epsilon)[0][0])
 
-# exemplo 2 de uso - muitos gráficos com duas telas
-#analise= partes_numerico_un ('u0',epsilon=epsilon)
-#primeiro = analise[0]
-#segundo = analise[1]
-#titulo_1=f'ε={Fraction (epsilon).limit_denominator()}'
-#titulo_2=f'ε={Fraction (epsilon).limit_denominator()}'
-#grafico_duplo (primeiro,segundo,rotulo_eixo_x1='x',rotulo_eixo_x2='y ou x/ε',titulo_1=titulo_1,titulo_2=titulo_2)
+#exemplo 2 de uso - muitos gráficos com duas telas
+if (exemplo_analisado==2):
+      analise= partes_analitico_un ('u1','n1',epsilon=epsilon)
+      primeiro = analise[0]
+      segundo = analise[1]
+      titulo_1=f'ε={Fraction (epsilon).limit_denominator()}'
+      titulo_2=f'ε={Fraction (epsilon).limit_denominator()}'
+      grafico_duplo (primeiro,segundo,rotulo_eixo_x1='x',rotulo_eixo_x2='y ou x/ε',titulo_1=titulo_1,titulo_2=titulo_2)
 
 #exemplo 3 de uso - muitíssimos gráficos com duas telas
-#analise1 = partes_analitico_un ('u0','u1','n1',epsilon=epsilon,precisao_grafico=50)
-#analise2 = partes_numerico_un ('u0','u1','n1',epsilon=epsilon,precisao_grafico=50)
-#primeiro = analise1[0]
-#primeiro.append (exato_partes_ue(epsilon=epsilon,precisao_grafico=50))
-#primeiro.extend (analise2[0])
-#segundo = analise1[1]
-#segundo.extend (analise2[1])
-#titulo_1=f'ε={Fraction (epsilon).limit_denominator()}'
-#titulo_2=f'ε={Fraction (epsilon).limit_denominator()}'
-#grafico_duplo (primeiro,segundo,rotulo_eixo_x1='x',rotulo_eixo_x2='y ou x/ε',titulo_1=titulo_1,titulo_2=titulo_2)
+if (exemplo_analisado==3):
+      analise1 = partes_analitico_un ('u0','u1','n1',epsilon=epsilon,precisao_grafico=50)
+      analise2 = partes_numerico_un ('u0','u1','n1',epsilon=epsilon,precisao_grafico=50)
+      primeiro = analise1[0]
+      primeiro.append (exato_partes_ue(epsilon=epsilon,precisao_grafico=50))
+      primeiro.extend (analise2[0])
+      segundo = analise1[1]
+      segundo.extend (analise2[1])
+      titulo_1=f'ε={Fraction (epsilon).limit_denominator()}'
+      titulo_2=f'ε={Fraction (epsilon).limit_denominator()}'
+      grafico_duplo (primeiro,segundo,rotulo_eixo_x1='x',rotulo_eixo_x2='y ou x/ε',titulo_1=titulo_1,titulo_2=titulo_2)
 
 #exemplo 4 de uso - comparando a velocidade de vários métodos
-#tempo do primeiro
-start_time = time.time()
+if (exemplo_analisado==4):
+      #tempo do primeiro
+      start_time = time.time()
 
-plotar (exato_partes_ue(epsilon=epsilon))
+      grafico1 = (exato_partes_ue(epsilon=epsilon))
 
-end_time = time.time()
-elapsed_time = end_time - start_time
-print(f'Tempo de execução do primeiro gráfico: {elapsed_time:.5f} segundos')
+      end_time = time.time()
+      elapsed_time = end_time - start_time
+      print(f'Tempo de execução do primeiro gráfico: {elapsed_time:.5f} segundos')
 
-#tempo do segundo
-start_time = time.time()
+      #tempo do segundo
+      start_time = time.time()
 
-plotar (aproximado_numerico_un('u0',epsilon=epsilon)[0][0])
+      grafico2 = (partes_numerico_un('u1',epsilon=epsilon)[0][0])
 
-end_time = time.time()
-elapsed_time = end_time - start_time
-print(f'Tempo de execução do segundo gráfico: {elapsed_time:.5f} segundos')
+      end_time = time.time()
+      elapsed_time = end_time - start_time
+      print(f'Tempo de execução do segundo gráfico: {elapsed_time:.5f} segundos')
 
-#tempo do terceiro
-start_time = time.time()
+      #tempo do terceiro
+      start_time = time.time()
 
-plotar (aproximado_analitico_un('u0',epsilon=epsilon)[0][0])
+      grafico3 = (partes_analitico_un('u1',epsilon=epsilon)[0][0])
 
-end_time = time.time()
-elapsed_time = end_time - start_time
-print(f'Tempo de execução do terceiro gráfico: {elapsed_time:.5f} segundos')
+      end_time = time.time()
+      elapsed_time = end_time - start_time
+      print(f'Tempo de execução do terceiro gráfico: {elapsed_time:.5f} segundos')
+
+      #comparação
+      titulo=f'ε={Fraction (epsilon).limit_denominator()}'
+      plotar(grafico1,grafico2,grafico3,titulo=titulo)

@@ -33,7 +33,7 @@ def exato_ue (*args, **kwargs):
         system('g++ ./magia_cpp/continuo_exato.cpp -o ./magia_cpp/saidas_e_executaveis/continuo_exato')
         system(f'.\magia_cpp\saidas_e_executaveis\continuo_exato {e} {precisao_grafico} {limite_inferior} {limite_superior}')
 
-        with open ("./magia_cpp/continuo_exato_saida_dados.txt","r") as resultados:
+        with open ("./magia_cpp/saidas_e_executaveis/continuo_exato_saida_dados.txt","r") as resultados:
             saida = json.loads (resultados.read())
             saida.append (nome)
             return saida

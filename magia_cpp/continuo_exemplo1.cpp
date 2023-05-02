@@ -7,10 +7,7 @@
 /*
 notas:
 
-saida arquivo ok v
-adicionar graficos  v
-adicionar as condicionais com argv v
-descobrir o que rola com N2 v
+codigo pronto
 
 */
 
@@ -68,7 +65,7 @@ int main (int argc, char* argv[]) {
             return (x*(x*x-1))/(6*a_chapeu)
             ;};
         //condicional para por u0********************
-        if (stoi(argv[5])){saida_1 = criador_grafico_json (saida_1,u0,"u0",superior,inferior,precisao_grafico);}
+        if (stoi(argv[5])){saida_1 = criador_grafico_json (saida_1,u0,"u0ca",superior,inferior,precisao_grafico);}
         //condicional para ver se u1 ou u2 é usado
         if (stoi (argv[6]) or stoi (argv[7])){
             //sobre N1 e u1--------------------
@@ -89,9 +86,9 @@ int main (int argc, char* argv[]) {
                 return N1(x)*du0dx(x)*E+u0(x)
             ;};
             //condicional para por u1********************
-            if (stoi(argv[6])){saida_1 = criador_grafico_json (saida_1,u1,"u1",superior,inferior,precisao_grafico);}
+            if (stoi(argv[6])){saida_1 = criador_grafico_json (saida_1,u1,"u1ca",superior,inferior,precisao_grafico);}
             //condicional para por N1********************
-            if (stoi(argv[8])){saida_2 = criador_grafico_json (saida_2,N1,"N1",superior,inferior,precisao_grafico_2);}
+            if (stoi(argv[8])){saida_2 = criador_grafico_json (saida_2,N1,"N1ca",superior,inferior,precisao_grafico_2);}
             //condicional para ver se u2 é usado
             if (stoi(argv[7])){
                 //sobre N2 e u2-------------------
@@ -109,9 +106,9 @@ int main (int argc, char* argv[]) {
                     ;};
                 
                 //condicional para u2*********************
-                if (stoi(argv[7])){saida_1 = criador_grafico_json (saida_1,u2,"u2",superior,inferior,precisao_grafico);}
+                if (stoi(argv[7])){saida_1 = criador_grafico_json (saida_1,u2,"u2ca",superior,inferior,precisao_grafico);}
                 //condicional para N2*********************
-                if (stoi(argv[9])){saida_2 = criador_grafico_json (saida_2,N2,"N2",superior,inferior,precisao_grafico_2);}
+                if (stoi(argv[9])){saida_2 = criador_grafico_json (saida_2,N2,"N2ca",superior,inferior,precisao_grafico_2);}
             }
         }
     }

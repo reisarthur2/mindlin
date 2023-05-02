@@ -21,7 +21,7 @@ def partes_numerico_un (*args, **kwargs):
     l_pequeno = float (0.01 padrao)\n
     l_grande = float (1 padrao)\n
     epsilon = float (padrao l/L)\n
-    precisao_grafico = float (padrao 0.01)\n
+    precisao_grafico = float (padrao 50 minimo 20)\n
     nome_custom = str (padrao "ue")\n
     
         
@@ -30,7 +30,7 @@ def partes_numerico_un (*args, **kwargs):
     l = kwargs.get ('l_pequeno',0.01)
     L = kwargs.get ('l_grande',1)
     e = kwargs.get ('epsilon',l/L)
-    precisao_grafico = kwargs.get ('precisao_grafico',0.01)
+    precisao_grafico = kwargs.get ('precisao_grafico',50)
     limite_superior = kwargs.get ('limite_superior',1)
     limite_inferior = kwargs.get ('limite_inferior',0)
     

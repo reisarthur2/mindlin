@@ -7,7 +7,9 @@
 /*
 notas:
 
-ainda sendo revisado
+descobrir por que ele tem 2x o periodo do seu
+equivalente analitico para um mesmo epsilon
+
 */
 
 
@@ -51,6 +53,7 @@ int main (int argc, char* argv[]) {
         ;};
     //constantes----------------------
     long double a_chapeu = 1/(integral([funcao_a](long double y) -> long double {return 1/funcao_a(y);}));
+    
     //condicional para botar funcao_a******************
     if  (stoi (argv[10])){saida_2 = criador_grafico_json (saida_2,funcao_a,"a",superior,inferior,precisao_grafico);}
     //condicional para ver se algum u é usado
@@ -70,24 +73,24 @@ int main (int argc, char* argv[]) {
                 ,x)/a_chapeu
             ;};
         //condicional para por u0********************
-        if (stoi(argv[5])){saida_1 = criador_grafico_json (saida_1,u0,"u0",superior,inferior,precisao_grafico);}
+        if (stoi(argv[5])){saida_1 = criador_grafico_json (saida_1,u0,"u0pn",superior,inferior,precisao_grafico);}
         //condicional para ver se u1 ou u2 é usado
         if (stoi (argv[6]) or stoi (argv[7]) or stoi(argv[9])){
             //sobre N1 e u1--------------------
-            auto N1 = [E,funcao_a,a_chapeu](long double y) -> long double{
+            auto N1 = [E,a_chapeu,funcao_a](long double y) -> long double {
                 long double y_real = y/E - floor(y/E);
-                return integral ([funcao_a,a_chapeu](long double s) -> long double{
-                    return (a_chapeu/funcao_a(s))-1.0000
-                    ;},y_real)
-                ;};
+                return integral ([a_chapeu,funcao_a](long double s) -> long double {
+                    return a_chapeu/funcao_a(s) - 1;
+                },y_real);
+            };
             
             auto u1 = [N1,E,du0dx,u0](long double x) -> long double{
                 return N1(x)*du0dx(x)*E+u0(x)
             ;};
             //condicional para por u1********************
-            if (stoi(argv[6])){saida_1 = criador_grafico_json (saida_1,u1,"u1",superior,inferior,precisao_grafico);}
+            if (stoi(argv[6])){saida_1 = criador_grafico_json (saida_1,u1,"u1pn",superior,inferior,precisao_grafico);}
             //condicional para por N1********************
-            if (stoi(argv[8])){saida_2 = criador_grafico_json (saida_2,N1,"N1",superior,inferior,precisao_grafico_2);}
+            if (stoi(argv[8])){saida_2 = criador_grafico_json (saida_2,N1,"N1pn",superior,inferior,precisao_grafico_2);}
             //condicional para ver se u2 é usado
             if (stoi(argv[7]) or stoi(argv[9])){
                 //sobre N2 e u2-------------------
@@ -105,9 +108,9 @@ int main (int argc, char* argv[]) {
                     ;};
                 
                 //condicional para u2*********************
-                if (stoi(argv[7])){saida_1 = criador_grafico_json (saida_1,u2,"u2",superior,inferior,precisao_grafico);}
+                if (stoi(argv[7])){saida_1 = criador_grafico_json (saida_1,u2,"u2pn",superior,inferior,precisao_grafico);}
                 //condicional para N2*********************
-                if (stoi(argv[9])){saida_2 = criador_grafico_json (saida_2,N2,"N2",superior,inferior,precisao_grafico_2);}
+                if (stoi(argv[9])){saida_2 = criador_grafico_json (saida_2,N2,"N2pn",superior,inferior,precisao_grafico_2);}
             }
         }
     }

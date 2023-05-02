@@ -13,7 +13,7 @@ def exato_ue (*args, **kwargs):
     l_pequeno = float (0.01 padrao)\n
     l_grande = float (1 padrao)\n
     epsilon = float (padrao l/L)\n
-    precisao_grafico = float (padrao 0.01)\n
+    precisao_grafico = float (padrao 50 minimo 20)\n
     nome_custom = str (padrao "ue")\n
     Retorna:\n
     
@@ -25,13 +25,13 @@ def exato_ue (*args, **kwargs):
     L = kwargs.get ('l_grande',1)
     e = kwargs.get ('epsilon',l/L)
     nome = kwargs.get ('nome_custom','ue')
-    precisao_grafico = kwargs.get ('precisao_grafico',0.01)
+    precisao_grafico = kwargs.get ('precisao_grafico',50)
     limite_superior = kwargs.get ('limite_superior',1)
     limite_inferior = kwargs.get ('limite_inferior',0)
     
     if (precisao_grafico>=20):
-        system('g++ ./magia_cpp/continuo_exato.cpp -o ./magia_cpp/continuo_exato')
-        system(f'.\magia_cpp\continuo_exato {e} {precisao_grafico} {limite_inferior} {limite_superior}')
+        system('g++ ./magia_cpp/continuo_exato.cpp -o ./magia_cpp/saidas_e_executaveis/continuo_exato')
+        system(f'.\magia_cpp\saidas_e_executaveis\continuo_exato {e} {precisao_grafico} {limite_inferior} {limite_superior}')
 
         with open ("./magia_cpp/continuo_exato_saida_dados.txt","r") as resultados:
             saida = json.loads (resultados.read())

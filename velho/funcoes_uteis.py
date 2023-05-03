@@ -20,6 +20,11 @@ def transformada_fourier (coeficientes,ponto):
     indice = linspace (0,tamanho,tamanho+1)
     return coeficientes[0][0]/2 + reduce(lambda acumulador,proximo: acumulador+proximo,map(lambda an,bn,n:an*cos(n*2*pi*ponto)+bn*sin(n*2*pi*ponto),coeficientes[0][1:],coeficientes[1][1:],indice[1:]))
 
+funcao = lambda x: x
+teste = fourier_coeficientes(funcao,numero_senoides=2)
+print (saida:=transformada_fourier(teste,50))
+
+
 def integral (funcao: Callable,lim_sup:float=1,lim_inf:float=0):
     precisao_por_unidade=2000
     intervalo= linspace(lim_inf,lim_sup, precisao_por_unidade)

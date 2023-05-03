@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-
+#include <vector>
 /*
 
 esse header pode ser modificado depois para outras
@@ -125,4 +125,33 @@ string criador_grafico_json (string acumulador,T funcao,string nome,long double 
     acumulador = acumulador.substr(0,acumulador.length()-1) + "],\"" +nome +"\"],";
     return acumulador;
 }
+template<typename T>
+pair<vector<long double>, vector<long double>> fourier_coeficientes(T funcao_imitada, int numero_senoides = 100) {
+    vector<long double> indice(numero_senoides + 1);
+    for (int i = 0; i <= numero_senoides; i++) {
+        indice[i] = i;
+    }
+    vector<long double> coeficientes_cos(numero_senoides + 1);
+    vector<long double> coeficientes_sin(numero_senoides + 1);
+    for (int i = 0; i <= numero_senoides; i++) {
+        long double x = indice[i];
+        coeficientes_cos[i] = 2 * integral([&](long double y){ return funcao_imitada(y) * cos(2 * M_PI * y * x); });
+        coeficientes_sin[i] = 2 * integral([&](long double y){ return funcao_imitada(y) * sin(2 * M_PI * y * x); });
+    }
+    return {coeficientes_cos, coeficientes_sin};
+};
 
+double transformada_fourier(pair<vector<long double>, vector<long double>> coeficientes, double ponto) {
+    int tamanho = coeficientes.first.size();
+    vector<double> indice(tamanho + 1);
+    for (int i = 0; i <= tamanho; i++) {
+        indice[i] = i;
+    }
+    double an = coeficientes.first[0] / 2;
+    for (int i = 1; i < tamanho; i++) {
+        double bn = coeficientes.second[i];
+        double n = indice[i];
+        an += (coeficientes.first[i] * cos(n * 2 * M_PI * ponto) + bn * sin(n * 2 * M_PI * ponto));
+    }
+    return an;
+}

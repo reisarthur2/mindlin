@@ -44,10 +44,10 @@ no aproximado quanto mais contas analiticas forem inseridas, menos pesado
 se torna o programa, mas o exato também não fica para trás
 """
 #por favor mudar o epsilon do jeito que desejar
-epsilon=1/4
+epsilon=1
 
 #tem vários exemplos de uso, meu preferido é o 4
-exemplo_analisado = 4
+exemplo_analisado = 2
 
 #exemplo 1.1 de uso - apenas um gráfico, para aproximadas é preciso
 #                   saber qual gráfico se quer, veja as saidas

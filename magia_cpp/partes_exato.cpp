@@ -28,30 +28,31 @@ int main (int argc, char* argv[]) {
 
 
     //declaração de funcoes do caso, favor nao tocar no resto
-    auto funcao_a = [E](double y) -> double{
-        long double y_real = y/E - floor(y/E);
+    auto funcao_a = [](double x) -> double{
+        long double y_real = x - floor(x);
         return y_real<=.25 ? (2) : (y_real>=.75 ? (2) : (3));
     };
     //aqui ^
-    auto funcao_x = [E](double x) -> double{
+    auto funcao_f = [E](double x) -> double{
         return
         -1;
     };
     //aqui ^
     //----------------------------------------------------
-    auto funcao_F = [E,funcao_x](double x) -> double{
-        return integral (funcao_x,x)
+    auto funcao_F = [E,funcao_f](double x) -> double{
+        return integral (funcao_f,x)
         ;
     };
     //constantes
-    double a_chapeu = 1/(integral([funcao_a](double y) -> double {return 1/funcao_a(y);}));
+    double a_chapeu = 1/(integral([funcao_a,E](double y) -> double {return 1/funcao_a(y/E);}));
     double parte_constante = a_chapeu*integral([funcao_a,funcao_F](double t) -> double {return funcao_F(t)/funcao_a(t);});
     
-    auto ue = [parte_constante,funcao_a,funcao_F](double x) -> double {
-        return integral (([parte_constante,funcao_a,funcao_F](double s) -> double {
-            return (funcao_F(s)-parte_constante)/funcao_a(s);
+    auto ue = [parte_constante,funcao_a,funcao_F,E](double x) -> double {
+        return integral (([parte_constante,funcao_a,funcao_F,E](double s) -> double {
+            return (funcao_F(s)-parte_constante)/funcao_a(s/E);
             }),x);
         };
+
     string auxiliar_saida = "";
     auxiliar_saida += criador_grafico_json (auxiliar_saida,ue,"uep",superior,inferior,precisao_grafico);
     

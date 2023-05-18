@@ -99,10 +99,22 @@ long double integral(T funcao,  double limite_superior = 1, double limite_inferi
 //    return integral;
 //}
 
+template<typename T>
+long double integral_dupla(T funcao,  double limite_superior = 1, double limite_inferior = 0, double dx = 0.0001) {
+    double atualx = limite_inferior;
+    double iterador = (limite_superior-limite_inferior)/dx + 1.0;
+    double acumulador = 0;
+    while (atualx<=limite_superior){
+        acumulador += iterador*funcao (atualx);
+        iterador-=1;
+        atualx+=dx;
+    }
+    return acumulador*dx*dx;
 
-
-double derivada (double(*funcao)(double),double x,double dx=0.000001){
-    return (funcao(x+dx)-funcao(x))/dx;
+}
+template<typename T>
+double derivada (T funcao,double x,double dx=0.000001){
+    return (funcao(x+dx)-funcao(x))/dx>1000 ;
 }
 
 string num_str(long double num) {

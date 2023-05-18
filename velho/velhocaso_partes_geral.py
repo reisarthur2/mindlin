@@ -13,10 +13,10 @@ delta=.25
 
 e=l/L
 
-funcao_aantiga = lambda x: a1 if (x<.5-delta) else a1 if (x>.5+delta) else a2
+funcao_aantiga = lambda y: a1 if (y-round(y)<.5-delta) else a1 if (y-round(y)>.5+delta) else a2
 funcao_x = lambda x: -1+x-x
 
-coeficientes=fourier_coeficientes (funcao_aantiga,numero_senoides=2)
+coeficientes=fourier_coeficientes (funcao_aantiga,numero_senoides=200)
 funcao_a = lambda x : transformada_fourier (coeficientes,x)
 
 #---------------------------------------------

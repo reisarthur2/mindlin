@@ -33,8 +33,8 @@ int main (int argc, char* argv[]) {
     string saida_1 = "";
     string saida_2 = "";
     //declaração de funcoes do caso, favor nao tocar no resto
-    auto funcao_a = [E](long double y) -> long double{
-        long double y_real = y/E - floor(y/E);
+    auto funcao_a = [](long double y) -> long double{
+        long double y_real = y - floor(y);
         return 
         y_real<=.25 ? (2) : (y_real>=.75 ? (2) : (3))
         ;};
@@ -49,7 +49,7 @@ int main (int argc, char* argv[]) {
     //constantes----------------------
     long double a_chapeu = 2.4;
     //condicional para botar funcao_a******************
-    if  (stoi (argv[10])){saida_2 = criador_grafico_json (saida_2,funcao_a,"a",superior,inferior,precisao_grafico);}
+    if  (stoi (argv[10])){saida_2 = criador_grafico_json (saida_2,funcao_a,"a",superior/E,inferior/E,precisao_grafico);}
     //condicional para ver se algum u é usado
     if (stoi (argv[5]) or stoi (argv[6]) or stoi (argv[7])){
         //sobre u0 ,du2/dx2 , du/dx--------------------------
@@ -70,36 +70,36 @@ int main (int argc, char* argv[]) {
         if (stoi (argv[6]) or stoi (argv[7])){
             //sobre N1 e u1--------------------
             long double raiz = pow(1-.25*.25,0.5);
-            auto N1 = [a_chapeu,E](long double y) -> long double {
-                long double y_real = y/E - floor(y/E);
+            auto N1 = [a_chapeu](long double y) -> long double {
+                long double y_real = y - floor(y);
                 return y_real<0.25 ? 0.2*y_real : (y_real>0.75 ? 0.2*y_real - 0.2 : -0.2*y_real+0.1);
             };
             auto u1 = [N1,E,du0dx,u0](long double x) -> long double{
-                return N1(x)*du0dx(x)*E+u0(x)
+                return N1(x/E)*du0dx(x)*E+u0(x)
             ;};
             //condicional para por u1********************
             if (stoi(argv[6])){saida_1 = criador_grafico_json (saida_1,u1,"u1pa",superior,inferior,precisao_grafico);}
             //condicional para por N1********************
-            if (stoi(argv[8])){saida_2 = criador_grafico_json (saida_2,N1,"N1pa",superior,inferior,precisao_grafico_2);}
+            if (stoi(argv[8])){saida_2 = criador_grafico_json (saida_2,N1,"N1pa",superior/E,inferior/E,precisao_grafico_2);}
             //condicional para ver se u2 é usado
             if (stoi(argv[7])){
                 //sobre N2 e u2-------------------
                 long double constante_N2 = a_chapeu*integral (N1);
                 auto N2 = [constante_N2,funcao_a,N1,E](long double y) -> long double {
-                    long double y_real = y/E - floor(y/E);
+                    long double y_real = y - floor(y);
                     return integral ([constante_N2,funcao_a,N1,E](long double s) -> long double {
                         return -N1(s) + constante_N2/funcao_a(s)
                         ;},y_real)
                     ;};
 
                 auto u2 = [d2u0dx2,N2,N1,du0dx,u0,E](long double x) -> long double {
-                    return d2u0dx2(x)*N2(x)*E*E+du0dx(x)*N1(x)*E+u0(x)
+                    return d2u0dx2(x)*N2(x/E)*E*E+du0dx(x)*N1(x/E)*E+u0(x)
                     ;};
                 
                 //condicional para u2*********************
                 if (stoi(argv[7])){saida_1 = criador_grafico_json (saida_1,u2,"u2pa",superior,inferior,precisao_grafico);}
                 //condicional para N2*********************
-                if (stoi(argv[9])){saida_2 = criador_grafico_json (saida_2,N2,"N2pa",superior,inferior,precisao_grafico_2);}
+                if (stoi(argv[9])){saida_2 = criador_grafico_json (saida_2,N2,"N2pa",superior/E,inferior/E,precisao_grafico_2);}
             }
         }
     }

@@ -44,10 +44,10 @@ no aproximado quanto mais contas analiticas forem inseridas, menos pesado
 se torna o programa, mas o exato também não fica para trás
 """
 #por favor mudar o epsilon do jeito que desejar
-epsilon=1
+epsilon=1/32
 
 #tem vários exemplos de uso, meu preferido é o 4
-exemplo_analisado = 2
+exemplo_analisado = 4
 
 #exemplo 1.1 de uso - apenas um gráfico, para aproximadas é preciso
 #                   saber qual gráfico se quer, veja as saidas
@@ -69,8 +69,8 @@ if (exemplo_analisado==2):
 
 #exemplo 3 de uso - muitíssimos gráficos com duas telas
 if (exemplo_analisado==3):
-      analise1 = partes_analitico_un ('u0','u1','n1',epsilon=epsilon,precisao_grafico=50)
-      analise2 = partes_numerico_un ('u0','u1','n1',epsilon=epsilon,precisao_grafico=50)
+      analise1 = partes_analitico_un ('u0','u1','N2','u2',epsilon=epsilon,precisao_grafico=50)
+      analise2 = partes_numerico_un ('u1',epsilon=epsilon,precisao_grafico=50)
       primeiro = analise1[0]
       primeiro.append (exato_partes_ue(epsilon=epsilon,precisao_grafico=50))
       primeiro.extend (analise2[0])
@@ -94,7 +94,7 @@ if (exemplo_analisado==4):
       #tempo do segundo
       start_time = time.time()
 
-      grafico2 = (partes_numerico_un('u1',epsilon=epsilon)[0][0])
+      grafico2 = (partes_numerico_un('u0',epsilon=epsilon)[0][0])
 
       end_time = time.time()
       elapsed_time = end_time - start_time
@@ -103,7 +103,7 @@ if (exemplo_analisado==4):
       #tempo do terceiro
       start_time = time.time()
 
-      grafico3 = (partes_analitico_un('u1',epsilon=epsilon)[0][0])
+      grafico3 = (partes_analitico_un('u2',epsilon=epsilon)[0][0])
 
       end_time = time.time()
       elapsed_time = end_time - start_time

@@ -1,5 +1,7 @@
 # mindlin
 
+needed: python 3.11, gcc (cpp compiler) and matplotlib 3.7.2
+
 for english speakers:
 
 abstract:

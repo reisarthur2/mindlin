@@ -9,6 +9,9 @@ from continuo_exemplo1 import aproximado_analitico_un
 from caso_partes_exato_geral import exato_partes_ue
 from caso_partes_aproximado import partes_numerico_un
 from caso_partes_exemplo1 import partes_analitico_un
+
+from imperfeito_exato import exato_imperfeito_ue
+from imperfeito_exemplo1 import imperfeito_analitico
 """
 nota1: é bom ler o que as funcoes recebem e o que retornam
        passando o mouse por cima das mesmas com a tecla ctrl
@@ -44,19 +47,34 @@ no aproximado quanto mais contas analiticas forem inseridas, menos pesado
 se torna o programa, mas o exato também não fica para trás
 """
 #por favor mudar o epsilon do jeito que desejar
-epsilon=1/32
+epsilon=1/4
 
 #tem vários exemplos de uso, meu preferido é o 4
-exemplo_analisado = 4
+exemplo_analisado = 1.2
+precisao=450
+#epsilon=1
+#plotar (exato_partes_ue(epsilon=epsilon,precisao_grafico = precisao),exato_imperfeito_ue(epsilon=epsilon,beta=500000,precisao_grafico=precisao),exato_imperfeito_ue(epsilon=epsilon,beta=100,precisao_grafico=precisao),mostrar=1)
+
 
 #exemplo 1.1 de uso - apenas um gráfico, para aproximadas é preciso
 #                   saber qual gráfico se quer, veja as saidas
 #                   para saber como consegui-lo!
 if (exemplo_analisado==1.1):
       plotar (exato_ue(epsilon=epsilon))
-#exemplo 1.2
+#exemplo 1.2  
 if (exemplo_analisado==1.2):
-      plotar (aproximado_analitico_un('u2',epsilon=epsilon)[0][0])
+      epsilon=1/128
+      plotar (#exato_partes_ue(epsilon=epsilon,precisao_grafico = precisao),
+              exato_imperfeito_ue(epsilon=epsilon,beta=500,precisao_grafico=precisao),
+              #exato_imperfeito_ue(epsilon=1/2,beta=100,precisao_grafico=precisao),
+              #exato_imperfeito_ue(epsilon=1/4,beta=100,precisao_grafico=precisao),
+              #exato_imperfeito_ue(epsilon=1/32,beta=100,precisao_grafico=precisao),
+              imperfeito_analitico('u0',epsilon=epsilon,beta=500,precisao_grafico=precisao)[0][0],
+              #imperfeito_analitico('u1',epsilon=epsilon,beta=100,precisao_grafico=precisao)[0][0],
+              #imperfeito_analitico('u2',epsilon=epsilon,beta=100,precisao_grafico=precisao)[0][0],
+              
+              mostrar=1,
+              titulo=f'ε={Fraction (epsilon).limit_denominator()}, beta={20}');
 
 #exemplo 2 de uso - muitos gráficos com duas telas
 if (exemplo_analisado==2):
@@ -85,29 +103,37 @@ if (exemplo_analisado==4):
       #tempo do primeiro
       start_time = time.time()
 
-      grafico1 = (exato_partes_ue(epsilon=epsilon))
+      grafico1 = (exato_imperfeito_ue(epsilon=epsilon,beta=500,precisao_grafico=precisao))
 
       end_time = time.time()
       elapsed_time = end_time - start_time
-      print(f'Tempo de execução do primeiro gráfico: {elapsed_time:.5f} segundos')
+      print(f'Tempo de execucao da solucao exata: {elapsed_time:.5f} segundos')
 
       #tempo do segundo
       start_time = time.time()
 
-      grafico2 = (partes_numerico_un('u0',epsilon=epsilon)[0][0])
+      grafico2 = (imperfeito_analitico('u0',epsilon=epsilon,beta=500,precisao_grafico=precisao)[0][0])
 
       end_time = time.time()
       elapsed_time = end_time - start_time
-      print(f'Tempo de execução do segundo gráfico: {elapsed_time:.5f} segundos')
+      print(f'Tempo de execucao do u0: {elapsed_time:.5f} segundos')
 
       #tempo do terceiro
       start_time = time.time()
 
-      grafico3 = (partes_analitico_un('u2',epsilon=epsilon)[0][0])
+      grafico3 = (imperfeito_analitico('u1',epsilon=epsilon,beta=500,precisao_grafico=precisao)[0][0])
 
       end_time = time.time()
       elapsed_time = end_time - start_time
-      print(f'Tempo de execução do terceiro gráfico: {elapsed_time:.5f} segundos')
+      print(f'Tempo de execucao do u1: {elapsed_time:.5f} segundos')
+      #tempo do quarto
+      start_time = time.time()
+
+      grafico4 = (imperfeito_analitico('u2',epsilon=epsilon,beta=500,precisao_grafico=precisao)[0][0])
+
+      end_time = time.time()
+      elapsed_time = end_time - start_time
+      print(f'Tempo de execucao do u2: {elapsed_time:.5f} segundos')
 
       #comparação
       titulo=f'ε={Fraction (epsilon).limit_denominator()}'

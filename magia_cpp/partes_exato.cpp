@@ -30,7 +30,7 @@ int main (int argc, char* argv[]) {
     //declaração de funcoes do caso, favor nao tocar no resto
     auto funcao_a = [](double x) -> double{
         long double y_real = x - floor(x);
-        return y_real<=.25 ? (2) : (y_real>=.75 ? (2) : (3));
+        return y_real<=.5 ? (5) : 10;
     };
     //aqui ^
     auto funcao_f = [E](double x) -> double{
@@ -45,7 +45,7 @@ int main (int argc, char* argv[]) {
     };
     //constantes
     double a_chapeu = 1/(integral([funcao_a,E](double y) -> double {return 1/funcao_a(y/E);}));
-    double parte_constante = a_chapeu*integral([funcao_a,funcao_F](double t) -> double {return funcao_F(t)/funcao_a(t);});
+    double parte_constante = a_chapeu*integral([funcao_a,funcao_F,E](double t) -> double {return funcao_F(t)/funcao_a(t/E);});
     
     auto ue = [parte_constante,funcao_a,funcao_F,E](double x) -> double {
         return integral (([parte_constante,funcao_a,funcao_F,E](double s) -> double {

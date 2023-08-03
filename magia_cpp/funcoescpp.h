@@ -103,7 +103,7 @@ template<typename T>
 long double integral_dupla(T funcao,  double limite_superior = 1, double limite_inferior = 0, double dx = 0.0001) {
     double atualx = limite_inferior;
     double iterador = (limite_superior-limite_inferior)/dx + 1.0;
-    double acumulador = 0;
+    double acumulador = 0.0;
     while (atualx<=limite_superior){
         acumulador += iterador*funcao (atualx);
         iterador-=1;

@@ -3,7 +3,6 @@ from typing import Callable,Iterable
 from os import system
 
 
-
 def plotar (*args:list,**kwargs):
     
     """
@@ -44,11 +43,11 @@ def plotar (*args:list,**kwargs):
     
     fig, eixos = mp.subplots(layout='constrained')
     for numero_do_grafico in range(len (args)):
-        eixos.plot (args[numero_do_grafico][0][:-1],args[numero_do_grafico][1][:-1],scalex=escalax,scaley=escalay,linewidth=linha_espessura,label=args[numero_do_grafico][2])
-    
+        eixos.scatter (args[numero_do_grafico][0][:-1],args[numero_do_grafico][1][:-1],linewidth=linha_espessura,label=args[numero_do_grafico][2])
+    mp.tick_params(axis='both', which='major', labelsize=32)
     eixos.grid()
-    eixos.legend()
-    eixos.set_title(titulo,size=20)
+    eixos.legend(borderpad=2,prop={'size':20})
+    #eixos.set_title(titulo,size=20)
     if (mostrar):
         mp.show ()
     else:

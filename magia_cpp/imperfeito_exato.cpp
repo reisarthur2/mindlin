@@ -28,11 +28,11 @@ int main (int argc, char* argv[]) {
     
     long double precisao_grafico = (superior-inferior)/amostras;
 
-    long double ponto_descontinuo = 0.5;
     //declaração de funcoes do caso, favor nao tocar no resto
+    long double ponto_descontinuo = 0.25;
     auto funcao_a = [](double x) -> double{
         long double y_real = x - floor(x);
-        return y_real<=.5 ? (5) : 10;
+        return y_real<=.25 ? (5) : (y_real>=.75 ? 5 : 10);
     };
     //aqui ^
     auto funcao_f = [E](double x) -> double{
@@ -52,7 +52,7 @@ int main (int argc, char* argv[]) {
         while (x_acum<x){
             resultado += funcao_F(x_acum);
             passadas += 1.0;
-            x_acum += (E*ponto_descontinuo);
+            x_acum += (E*0.5);
 
         };
 
@@ -60,7 +60,7 @@ int main (int argc, char* argv[]) {
     //constantes
     long double c0 = -(integral([funcao_F,funcao_a,E](double s) -> double {
         return funcao_F(s)/funcao_a(s/E);
-    }) + descontinuidades(1,0))/(integral([funcao_a,E](double s)->double{return 1.0/funcao_a(s/E);})+E*(2/E-1)/beta) ;
+    }) + descontinuidades(1,0))/(integral([funcao_a,E](double s)->double{return 1.0/funcao_a(s/E);})+E*(2/E)/beta) ;
     
     auto ue = [c0,funcao_F,funcao_a,descontinuidades,E](double x)->double{
         return -integral ([funcao_F,funcao_a,c0,E](double s)->double{

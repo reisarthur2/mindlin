@@ -9,7 +9,7 @@
 #        saida = json.loads (resultados.read())
 #        return saida
 #    
-
+"""
 
 def integral2 (funcao,limsup=5,liminf=1,dx=0.0002):
     atualx=liminf
@@ -24,3 +24,13 @@ def integral2 (funcao,limsup=5,liminf=1,dx=0.0002):
 bola = lambda x: x 
 
 print (integral2 (bola))
+"""
+x=0
+epsilon=1/3
+pt1=0.25
+pt2=0.75
+x=pt1*epsilon
+print (2/epsilon)
+while x<1:
+    print (x)
+    x+=epsilon*.5

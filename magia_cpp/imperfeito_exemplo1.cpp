@@ -7,8 +7,7 @@
 /*
 notas:
 
-descobrir por que ele tem 2x o periodo do seu
-equivalente analitico para um mesmo epsilon
+pensar em alguma forma de deixar a integral de N2 mais leve para integrais numéricas (possivel implementar a função integral dupla)
 
 */
 
@@ -16,7 +15,6 @@ equivalente analitico para um mesmo epsilon
 using namespace std;
 int main (int argc, char* argv[]) {
     if (argc != 13 or (stoi (argv[argc-1])==0)){
-        cout << "gay" << endl;
         cerr << "Uso: " << argv[0] << " <epslon> <precisao grafico> <bool> <bool> <bool> <bool> <bool> <bool>\n" << "encontrados " << argc << " parametros";
         return 1;
     }
@@ -42,7 +40,7 @@ int main (int argc, char* argv[]) {
     auto funcao_a = [](long double y) -> long double{
         long double y_real = y - floor(y);
         return 
-        y_real<=.5 ? (5) : 10;
+        y_real<=.25 ? (5) : (y_real>=.75 ? 5 : 10)
         ;};
     //aqui ^
     auto funcao_f = [](long double x) -> long double{
@@ -54,7 +52,7 @@ int main (int argc, char* argv[]) {
         x
         ;};
     //constantes----------------------
-    long double a_chapeu = 1.0/((integral([funcao_a,E](long double y) -> long double {return 1.0/funcao_a(y);}))+1/beta);
+    long double a_chapeu = 1.0/((integral([funcao_a,E](long double y) -> long double {return 1.0/funcao_a(y);}))+1/beta+1/beta);
     
     //condicional para botar funcao_a******************
     if  (stoi (argv[10])){saida_2 = criador_grafico_json (saida_2,funcao_a,"a_imperfeito",superior/E,inferior/E,precisao_grafico);}
@@ -81,11 +79,15 @@ int main (int argc, char* argv[]) {
             //sobre N1 e u1--------------------
             auto N1 = [a_chapeu,funcao_a,E,beta](long double y) -> long double {
                 long double y_real = y - floor(y);
-                return y_real<=.5 ? (y_real*(a_chapeu/5.0 - 1.0)):(y_real * (a_chapeu/10.0 -1.0)+0.5*(a_chapeu/5.0 -a_chapeu/10)+a_chapeu/beta);
-                //original
+                //forma de integral genérica que é mais pesada
+                //long double adicional= y_real<=.25 ? (0) : (y_real>=.75 ? 2 : 1);
                 //return integral ([a_chapeu,funcao_a](long double s) -> long double {
                 //    return (a_chapeu/funcao_a(s)-1.0);
-                //},y_real);
+                //},y_real)+adicional*a_chapeu/beta;
+                //forma de integral resolvida
+                return y_real<=.25 ? a_chapeu*y_real/5 -y_real: 
+                (y_real<=.75 ? a_chapeu*y_real/10 -y_real + a_chapeu*.25/5 -.25 + a_chapeu/beta: 
+                a_chapeu*y_real/5 -y_real+a_chapeu*0.75/10 -0.75 + a_chapeu*.25/5 -.25 + 2*a_chapeu/beta);
             };
             //auto u1 = [N1,u0,E,a_chapeu](long double x) -> long double{
             //    return u0(x)+E*N1(x/E)*(-2*x+1)/(2*a_chapeu); 

@@ -50,7 +50,7 @@ se torna o programa, mas o exato também não fica para trás
 epsilon=1/4
 
 #tem vários exemplos de uso, meu preferido é o 4
-exemplo_analisado = 1.2
+exemplo_analisado = 4
 precisao=450
 #epsilon=1
 #plotar (exato_partes_ue(epsilon=epsilon,precisao_grafico = precisao),exato_imperfeito_ue(epsilon=epsilon,beta=500000,precisao_grafico=precisao),exato_imperfeito_ue(epsilon=epsilon,beta=100,precisao_grafico=precisao),mostrar=1)
@@ -63,15 +63,15 @@ if (exemplo_analisado==1.1):
       plotar (exato_ue(epsilon=epsilon))
 #exemplo 1.2  
 if (exemplo_analisado==1.2):
-      epsilon=1/128
+      epsilon=1/64
       plotar (#exato_partes_ue(epsilon=epsilon,precisao_grafico = precisao),
-              exato_imperfeito_ue(epsilon=epsilon,beta=500,precisao_grafico=precisao),
+              exato_imperfeito_ue(epsilon=epsilon,beta=100,precisao_grafico=precisao),
               #exato_imperfeito_ue(epsilon=1/2,beta=100,precisao_grafico=precisao),
               #exato_imperfeito_ue(epsilon=1/4,beta=100,precisao_grafico=precisao),
-              #exato_imperfeito_ue(epsilon=1/32,beta=100,precisao_grafico=precisao),
-              imperfeito_analitico('u0',epsilon=epsilon,beta=500,precisao_grafico=precisao)[0][0],
-              #imperfeito_analitico('u1',epsilon=epsilon,beta=100,precisao_grafico=precisao)[0][0],
-              #imperfeito_analitico('u2',epsilon=epsilon,beta=100,precisao_grafico=precisao)[0][0],
+              #exato_imperfeito_ue(epsilon=1/64,beta=100,precisao_grafico=precisao),
+              imperfeito_analitico('u0',epsilon=epsilon,beta=100,precisao_grafico=precisao)[0][0],
+              imperfeito_analitico('u1',epsilon=epsilon,beta=100,precisao_grafico=precisao)[0][0],
+              imperfeito_analitico('u2',epsilon=epsilon,beta=100,precisao_grafico=precisao)[0][0],
               
               mostrar=1,
               titulo=f'ε={Fraction (epsilon).limit_denominator()}, beta={20}');
